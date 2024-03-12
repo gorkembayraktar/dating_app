@@ -1,6 +1,9 @@
+import 'package:dating_app/blocs/swipe/swipe_bloc.dart';
 import 'package:dating_app/models/models.dart';
 import 'package:dating_app/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,92 +20,150 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(),
-        body: Column(
-          children: [
-            UserCard(
-              user: User.users[0],
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ChoiceButton(
-                    width: 60,
-                    height: 60,
-                    size: 25,
-                    iconData: Icons.clear_rounded,
-                    color: Colors.redAccent,
-                    hasGradient: false,
+        body: BlocBuilder<SwipeBloc, SwipeState>(
+        builder: (context, state) {
+          if(state is SwipeLoading ){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }else if(state is SwipeLoaded){
+
+            return Column(
+              children: [
+                Draggable(
+                  child: UserCard(
+                    user: state.users[0],
                   ),
-                  ChoiceButton(
-                    width: 80,
-                    height: 80,
-                    size: 30,
-                    iconData: Icons.favorite,
-                    color: Colors.white,
-                    hasGradient: true,
+                  feedback: UserCard(
+                    user: state.users[0],
                   ),
-                  ChoiceButton(
-                    width: 60,
-                    height: 60,
-                    size: 25,
-                    iconData: Icons.watch_later,
-                    color: Colors.black,
-                    hasGradient: false,
-                  )
-                ],
-              ),
-            ),
+                  childWhenDragging: UserCard(
+                    user: state.users[1],
+                  ),
+                  onDragEnd: (drag){
+                    if(drag.velocity.pixelsPerSecond.dx < 0){
+                      context.read<SwipeBloc>()..add(SwipeLeftEvent(user: state.users[0]));
 
-          ],
-        ));
-  }
-}
+                      print('swiped left');
+                    }else{
+                      context.read<SwipeBloc>()..add(SwipeRightEvent(user: state.users[0]));
 
-class ChoiceButton extends StatelessWidget {
-  final double width;
-  final double height;
-  final double size;
-  final Color color;
-  final IconData iconData;
-  final bool hasGradient;
+                      print('swiped right');
+                    }
+                  },
+                ),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        child: const ChoiceButton(
+                          width: 60,
+                          height: 60,
+                          size: 25,
+                          iconData: Icons.clear_rounded,
+                          color: Colors.redAccent,
+                          hasGradient: false,
+                        ),
+                        onTap: (){
+                          context.read<SwipeBloc>()..add(SwipeLeftEvent(user: state.users[0]));
+                        },
+                      ),
+                      InkWell(
+                        child: const ChoiceButton(
+                          width: 80,
+                          height: 80,
+                          size: 30,
+                          iconData: Icons.favorite,
+                          color: Colors.white,
+                          hasGradient: true,
+                        ),
+                        onTap: (){
+                          context.read<SwipeBloc>()..add(SwipeRightEvent(user: state.users[0]));
+                        },
+                      ),
+                      ChoiceButton(
+                        width: 60,
+                        height: 60,
+                        size: 25,
+                        iconData: Icons.watch_later,
+                        color: Colors.black,
+                        hasGradient: false,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }else{
+            return Text('Bir şeyler ters gitmiş olmalı.');
+          }
+        }
+        )
 
-  const ChoiceButton({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.size,
-    required this.color,
-    required this.iconData,
-    required this.hasGradient
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        gradient: hasGradient ? LinearGradient(colors: [
-          Theme.of(context).primaryColor,
-          Colors.redAccent
-        ]) : LinearGradient(colors: [
-          Colors.white,
-          Colors.white
-        ]),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.grey.withAlpha(50),
-              spreadRadius: 4,
-              blurRadius: 4,
-              offset: const Offset(3,3)
-          )
-        ]
-      ),
-      child: Icon(iconData, color: color, size: size,),
     );
   }
+
+  Widget columnItems(context, SwipeLoaded state){
+      return Column(
+        children: [
+          Draggable(
+            child: UserCard(
+              user: state.users.first,
+            ),
+            feedback: UserCard(
+              user: state.users.first,
+            ),
+            childWhenDragging: UserCard(
+              user: state.users[1],
+            ),
+            onDragEnd: (drag){
+              if(drag.velocity.pixelsPerSecond.dx < 0){
+                context.read<SwipeBloc>()..add(SwipeLeftEvent(user: state.users[0]));
+
+                print('swiped left');
+              }else{
+                context.read<SwipeBloc>()..add(SwipeRightEvent(user: state.users[0]));
+
+                print('swiped right');
+              }
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
+            child:  Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ChoiceButton(
+                  width: 60,
+                  height: 60,
+                  size: 25,
+                  iconData: Icons.clear_rounded,
+                  color: Colors.redAccent,
+                  hasGradient: false,
+                ),
+                ChoiceButton(
+                  width: 80,
+                  height: 80,
+                  size: 30,
+                  iconData: Icons.favorite,
+                  color: Colors.white,
+                  hasGradient: true,
+                ),
+                ChoiceButton(
+                  width: 60,
+                  height: 60,
+                  size: 25,
+                  iconData: Icons.watch_later,
+                  color: Colors.black,
+                  hasGradient: false,
+                )
+              ],
+            ),
+          ),
+        ],
+      );
+  }
 }
+
