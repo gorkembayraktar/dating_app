@@ -1,6 +1,6 @@
 import 'package:dating_app/screens/onboarding/widgets/custom_button.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_checkbox.dart';
-import 'package:dating_app/screens/onboarding/widgets/custom_image_container.dart';
+import 'package:dating_app/widgets/custom_image_container.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_text_field.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_text_header.dart';
 import 'package:flutter/material.dart';

@@ -35,7 +35,7 @@ class User extends Equatable{
               'https://plus.unsplash.com/premium_photo-1661543038302-e6da2933e921?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           ],
           jobTitle: 'Job title',
-          bio: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley sfa fsa fsa fas fas as fas fas fasf asf as fasfsa fas fas as fasf as fas asfas fa fasf as as fa fas fasf a fas as fas fa saf asf asf afa sf sa fsa fasf af af af af af af asas asf af af asf a faf a faf asf a faf af af af a af af a fa fa fass'
+          bio: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley'
         ),
       User(
           id: 2,

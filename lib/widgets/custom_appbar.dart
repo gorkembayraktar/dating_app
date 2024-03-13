@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Container(
         width: 250,
         child: Row(
+
           children: [
             Expanded(
               child: SvgPicture.asset(
@@ -30,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Expanded(
-                flex: 2,
+                flex:2,
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(

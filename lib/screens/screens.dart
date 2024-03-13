@@ -4,3 +4,4 @@ export 'onboarding/onboarding_screen.dart';
 
 export 'matches/matches_screen.dart';
 export 'chat/chat_screen.dart';
+export 'profile/profile_screen.dart';
