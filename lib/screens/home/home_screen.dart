@@ -9,6 +9,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
 
+  static Route route(){
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => const HomeScreen()
+    );
+  }
+
   const HomeScreen({super.key});
 
   @override

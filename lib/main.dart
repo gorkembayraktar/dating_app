@@ -1,6 +1,8 @@
 import 'package:dating_app/blocs/swipe/swipe_bloc.dart';
+import 'package:dating_app/config/app_router.dart';
 import 'package:dating_app/models/models.dart';
 import 'package:dating_app/screens/home/home_screen.dart';
+import 'package:dating_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: const HomeScreen(),
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          initialRoute: UsersScreen.routeName,
         )
     );
 
