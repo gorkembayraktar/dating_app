@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const HomeScreen(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: UsersScreen.routeName,
+          initialRoute: HomeScreen.routeName,
         )
     );
 

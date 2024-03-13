@@ -1,3 +1,4 @@
+import 'package:dating_app/models/models.dart';
 import 'package:flutter/material.dart';
 import '/screens/screens.dart';
 
@@ -10,7 +11,7 @@ class AppRouter {
       case '/':
         return HomeScreen.route();
       case UsersScreen.routeName:
-        return UsersScreen.route();
+        return UsersScreen.route(user: settings.arguments as User);
       default:
         return _errorRoute();
     }

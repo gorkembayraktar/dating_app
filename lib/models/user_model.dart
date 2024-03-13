@@ -4,6 +4,7 @@ class User extends Equatable{
     final int id;
     final String name;
     final int age;
+    final List<String> interests;
     final List<String> imageUrls;
     final String bio;
     final String jobTitle;
@@ -13,6 +14,7 @@ class User extends Equatable{
       required this.name,
       required this.age,
       required this.imageUrls,
+      required this.interests,
       required this.bio,
       required this.jobTitle,
     });
@@ -25,6 +27,7 @@ class User extends Equatable{
           id: 1,
           name: 'Anna',
           age: 26,
+          interests: ['Müzik', 'Doğa Yürüyüşü', 'Siyaset'],
           imageUrls: [
               'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
               'https://plus.unsplash.com/premium_photo-1686244745070-44e350da9d37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -32,12 +35,13 @@ class User extends Equatable{
               'https://plus.unsplash.com/premium_photo-1661543038302-e6da2933e921?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           ],
           jobTitle: 'Job title',
-          bio: 'Lorem ipsum sit amet'
+          bio: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley sfa fsa fsa fas fas as fas fas fasf asf as fasfsa fas fas as fasf as fas asfas fa fasf as as fa fas fasf a fas as fas fa saf asf asf afa sf sa fsa fasf af af af af af af asas asf af af asf a faf a faf asf a faf af af af a af af a fa fa fass'
         ),
       User(
           id: 2,
           name: 'Tamara',
           age: 23,
+          interests: ['Müzik', 'Doğa Yürüyüşü', 'Siyaset'],
           imageUrls: [
             'https://plus.unsplash.com/premium_photo-1661543038302-e6da2933e921?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -50,6 +54,7 @@ class User extends Equatable{
           id: 3,
           name: 'Katarina',
           age: 28,
+          interests: ['Müzik', 'Doğa Yürüyüşü', 'Siyaset'],
           imageUrls: [
             'https://plus.unsplash.com/premium_photo-1686244745026-98fc15ad3400?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -64,6 +69,7 @@ class User extends Equatable{
           id: 4,
           name: 'Cesus',
           age: 33,
+          interests: ['Müzik', 'Doğa Yürüyüşü', 'Siyaset'],
           imageUrls: [
             'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             'https://plus.unsplash.com/premium_photo-1686244745070-44e350da9d37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -77,6 +83,7 @@ class User extends Equatable{
           id: 5,
           name: 'Arya',
           age: 25,
+          interests: ['Müzik', 'Doğa Yürüyüşü', 'Siyaset'],
           imageUrls: [
             'https://plus.unsplash.com/premium_photo-1661543038302-e6da2933e921?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',

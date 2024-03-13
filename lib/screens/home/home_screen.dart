@@ -1,5 +1,6 @@
 import 'package:dating_app/blocs/swipe/swipe_bloc.dart';
 import 'package:dating_app/models/models.dart';
+import 'package:dating_app/screens/screens.dart';
 import 'package:dating_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,27 +38,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
             return Column(
               children: [
-                Draggable(
-                  child: UserCard(
-                    user: state.users[0],
-                  ),
-                  feedback: UserCard(
-                    user: state.users[0],
-                  ),
-                  childWhenDragging: UserCard(
-                    user: state.users[1],
-                  ),
-                  onDragEnd: (drag){
-                    if(drag.velocity.pixelsPerSecond.dx < 0){
-                      context.read<SwipeBloc>()..add(SwipeLeftEvent(user: state.users[0]));
-
-                      print('swiped left');
-                    }else{
-                      context.read<SwipeBloc>()..add(SwipeRightEvent(user: state.users[0]));
-
-                      print('swiped right');
-                    }
+                InkWell(
+                  onDoubleTap: (){
+                    Navigator.pushNamed(context, UsersScreen.routeName, arguments: state.users[0]);
                   },
+                  child: Draggable<User>(
+                    child: UserCard(
+                      user: state.users[0],
+                    ),
+                    feedback: UserCard(
+                      user: state.users[0],
+                    ),
+                    childWhenDragging: UserCard(
+                      user: state.users[1],
+                    ),
+                    onDragEnd: (drag){
+                      if(drag.velocity.pixelsPerSecond.dx < 0){
+                        context.read<SwipeBloc>()..add(SwipeLeftEvent(user: state.users[0]));
+                  
+                        print('swiped left');
+                      }else{
+                        context.read<SwipeBloc>()..add(SwipeRightEvent(user: state.users[0]));
+                  
+                        print('swiped right');
+                      }
+                    },
+                  ),
                 ),
                  Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),

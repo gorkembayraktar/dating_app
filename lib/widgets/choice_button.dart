@@ -4,18 +4,18 @@ class ChoiceButton extends StatelessWidget {
   final double width;
   final double height;
   final double size;
-  final Color color;
+  final Color? color;
   final IconData iconData;
   final bool hasGradient;
 
   const ChoiceButton({
     super.key,
-    required this.width,
-    required this.height,
-    required this.size,
+    this.width = 60,
+    this.height = 60,
+    this.size = 25,
+    this.hasGradient = false,
     required this.color,
     required this.iconData,
-    required this.hasGradient
   });
 
   @override
