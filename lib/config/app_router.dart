@@ -10,6 +10,8 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return HomeScreen.route();
+      case OnboardingScreen.routeName:
+        return OnboardingScreen.route();
       case UsersScreen.routeName:
         return UsersScreen.route(user: settings.arguments as User);
       default:
