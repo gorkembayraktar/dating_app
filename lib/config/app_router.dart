@@ -1,4 +1,5 @@
 import 'package:dating_app/models/models.dart';
+import 'package:dating_app/screens/matches/matches_screen.dart';
 import 'package:flutter/material.dart';
 import '/screens/screens.dart';
 
@@ -14,6 +15,8 @@ class AppRouter {
         return OnboardingScreen.route();
       case UsersScreen.routeName:
         return UsersScreen.route(user: settings.arguments as User);
+      case MatchesScreen.routeName:
+        return MatchesScreen.route();
       default:
         return _errorRoute();
     }

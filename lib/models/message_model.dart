@@ -51,7 +51,7 @@ class Message extends Equatable{
           id: 4,
           senderId: 1,
           receiverId: 3,
-          message: 'merhaba nasılsın?',
+          message: 'merhabalarrr nasılsın?',
           dateTime: DateTime.now(),
           timeString: DateFormat.jm().format(DateTime.now())
       ),

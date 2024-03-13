@@ -7,12 +7,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool hasActions;
 
-  const CustomAppBar({super.key, required this.title, required this.hasActions});
+  const CustomAppBar({super.key, required this.title, this.hasActions = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: hasActions, // aksiyon varsa geri butonu olabilir
+      automaticallyImplyLeading: false, // aksiyon varsa geri butonu olabilir
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
