@@ -35,36 +35,19 @@ class Pictures extends StatelessWidget {
                     if(state is ImagesLoaded){
                       var imagesCount = state.imageUrls.length;
 
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              imagesCount > 0 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[0],) :
-                              CustomImageContainer(),
-
-                              imagesCount > 1 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[1],) :
-                              CustomImageContainer(),
-                              imagesCount > 2 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[2],) :
-                              CustomImageContainer(),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              imagesCount > 3 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[3],) :
-                              CustomImageContainer(),
-                              imagesCount > 4 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[4],) :
-                              CustomImageContainer(),
-                              imagesCount > 5 ?
-                              CustomImageContainer(imageUrl: state.imageUrls[5],) :
-                              CustomImageContainer(),
-                            ],
-                          )
-                        ],
+                      return SizedBox(
+                        height: 350,
+                        child: GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3, childAspectRatio: 0.66
+                            ),
+                            itemCount: 6,
+                            itemBuilder: (BuildContext context, int index){
+                              return (imagesCount > index) ?
+                              CustomImageContainer(imageUrl: state.imageUrls[index],) :
+                              CustomImageContainer();
+                            },
+                        ),
                       );
                     }
 
