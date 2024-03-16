@@ -1,16 +1,14 @@
+import 'package:dating_app/cubits/signup/signup_cubit.dart';
 import 'package:dating_app/utils/widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomButton extends StatelessWidget {
   final TabController tabController;
-  final TextEditingController? emailController;
-  final TextEditingController? passwordController;
   final String text;
   const CustomButton({super.key,
     required this.tabController, required this.text,
-    this.emailController,
-    this.passwordController
   });
 
   @override
@@ -26,17 +24,14 @@ class CustomButton extends StatelessWidget {
         )
       ),
       child: ElevatedButton(
-          onPressed: () async {
-
-            if(emailController != null && passwordController != null){
-              try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: emailController!.text,
-                    password: passwordController!.text
-                );
-                tabController.animateTo(tabController.index + 1);
-              } on FirebaseAuthException catch(e){
-                var codes = {
+          onPressed: () {
+            tabController.animateTo(tabController.index + 1);
+            print('index' + tabController.index.toString());
+            if(tabController.index == 2){
+              context.read<SignupCubit>().signupWithCredentials();
+            }
+            /*
+            var codes = {
                   'email-already-in-use': 'Email adresi zaten kullanılıyor',
                   'weak-password': 'En az 6 karakterli şifre giriniz',
                   'invalid-email': 'Email adresi geçersiz!',
@@ -45,9 +40,7 @@ class CustomButton extends StatelessWidget {
                 DisplayMessage(context, codes.containsKey(e.code) ?
                 codes[e.code].toString() :
                 e.code);
-              }
-            }
-
+             */
 
           },
           style: ElevatedButton.styleFrom(elevation: 0, backgroundColor: Colors.transparent), 
