@@ -1,11 +1,20 @@
 import 'package:dating_app/blocs/swipe/swipe_bloc.dart';
 import 'package:dating_app/config/app_router.dart';
+import 'package:dating_app/firebase_options.dart';
 import 'package:dating_app/models/models.dart';
 import 'package:dating_app/screens/screens.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -27,9 +36,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const HomeScreen(),
+          //home: const HomeScreen(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: ProfileScreen.routeName,
+          initialRoute: OnboardingScreen.routeName,
         )
     );
 

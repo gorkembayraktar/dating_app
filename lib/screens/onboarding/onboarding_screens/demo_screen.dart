@@ -12,6 +12,9 @@ class Demo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final ageController = TextEditingController();
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Column(
@@ -26,7 +29,7 @@ class Demo extends StatelessWidget {
               CustomCheckBox(tabController: tabController, text: 'Kadın'),
               SizedBox(height: 50,),
               CustomTextHeader(tabController: tabController, text: 'Yaşınız Nedir?'),
-              CustomTextField(tabController: tabController, text: 'Yaşınızı girin')
+              CustomTextField(tabController: tabController, text: 'Yaşınızı girin', controller: ageController,)
             ]
           ),
           Column(
