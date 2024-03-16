@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:dating_app/repositories/base_auth_repository.dart';
+import 'package:dating_app/repositories/auth/base_auth_repository.dart';
 
 class AuthRepository extends BaseAuthRepository{
   final auth.FirebaseAuth _firebaseAuth;

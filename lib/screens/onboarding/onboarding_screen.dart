@@ -1,5 +1,5 @@
 import 'package:dating_app/cubits/signup/signup_cubit.dart';
-import 'package:dating_app/repositories/auth_repository.dart';
+import 'package:dating_app/repositories/auth/auth_repository.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/bio_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/demo_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/email_screen.dart';

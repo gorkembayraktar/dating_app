@@ -1,4 +1,4 @@
-import 'package:dating_app/repositories/auth_repository.dart';
+import 'package:dating_app/repositories/auth/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
