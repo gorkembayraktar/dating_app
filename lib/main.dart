@@ -1,4 +1,3 @@
-
 import 'blocs/blocs.dart';
 import 'repositories/repositories.dart';
 
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -28,16 +26,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_)=> AuthRepository()),
+        RepositoryProvider(create: (_) => AuthRepository()),
       ],
       child: MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_)=>AuthBloc(authRepository: context.read<AuthRepository>() ,),),
-            BlocProvider<SwipeBloc>(create: (_) => SwipeBloc()..add(LoadUsersEvent(users: User.users),),),
-            BlocProvider(create: (_) => ImagesBloc(databaseRepository: DatabaseRepository())..add(LoadImages()))
+            BlocProvider(
+              create: (_) => AuthBloc(
+                authRepository: context.read<AuthRepository>(),
+              ),
+            ),
+            BlocProvider<SwipeBloc>(
+              create: (_) => SwipeBloc()
+                ..add(
+                  LoadUsersEvent(users: User.users),
+                ),
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -49,9 +54,7 @@ class MyApp extends StatelessWidget {
             //home: const HomeScreen(),
             onGenerateRoute: AppRouter.onGenerateRoute,
             initialRoute: OnboardingScreen.routeName,
-          )
-      ),
+          )),
     );
-
   }
 }

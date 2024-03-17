@@ -1,15 +1,15 @@
 import 'package:dating_app/blocs/onboarding/onboarding_bloc.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_button.dart';
-import 'package:dating_app/screens/onboarding/widgets/custom_checkbox.dart';
+import 'package:dating_app/widgets/custom_text_container.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_text_field.dart';
 import 'package:dating_app/screens/onboarding/widgets/custom_text_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class Demo extends StatelessWidget {
+class Location extends StatelessWidget {
   final TabController tabController;
-  const Demo({super.key, required this.tabController});
+  const Location({super.key, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +20,9 @@ class Demo extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-
         if (state is! OnboardingLoaded) {
           return const Center(
-            child: Text('hata!'),
+            child: Text('Bir sorun oluştu.'),
           );
         }
 
@@ -35,48 +34,27 @@ class Demo extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   CustomTextHeader(
                     tabController: tabController,
-                    text: 'Cinsiyetiniz Nedir?',
+                    text: 'Neredesin?',
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomCheckBox(
-                    text: 'Erkek',
-                    value: state.user.gender == 'Erkek',
-                    onChanged: (bool? newValue) {
-                      context.read<OnboardingBloc>().add(UpdateUser(
-                          user: state.user.copyWith(gender: 'Erkek')));
-                    },
-                  ),
-                  CustomCheckBox(
-                    text: 'Kadın',
-                    value: state.user.gender == 'Kadın',
-                    onChanged: (bool? newValue) {
-                      context.read<OnboardingBloc>().add(UpdateUser(
-                          user: state.user.copyWith(gender: 'Kadın')));
-                    },
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  CustomTextHeader(
-                      tabController: tabController, text: 'Yaşınız Nedir?'),
                   CustomTextField(
-                    text: 'Yaşınızı girin',
-                    onChanged: (String? value) {
-                      context.read<OnboardingBloc>().add(UpdateUser(
-                          user: state.user.copyWith(
-                              age: value != null && value.isNotEmpty
-                                  ? int.parse(value)
-                                  : 0)));
+                    text: 'Lokasyon bilginiz',
+                    onChanged: (value) {
+                      context.read<OnboardingBloc>().add(
+                            UpdateUser(
+                              user: state.user.copyWith(location: value),
+                            ),
+                          );
                     },
-                  )
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
                 ]),
                 Column(
                   children: [
                     StepProgressIndicator(
                       totalSteps: 6,
-                      currentStep: 3,
+                      currentStep: 6,
                       selectedColor: Theme.of(context).primaryColor,
                       unselectedColor:
                           Theme.of(context).scaffoldBackgroundColor,
@@ -86,7 +64,7 @@ class Demo extends StatelessWidget {
                     ),
                     CustomButton(
                       tabController: tabController,
-                      text: 'Devam et',
+                      text: 'Bitir',
                     )
                   ],
                 ),

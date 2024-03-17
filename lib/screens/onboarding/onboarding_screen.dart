@@ -1,9 +1,13 @@
+import 'package:dating_app/blocs/onboarding/onboarding_bloc.dart';
 import 'package:dating_app/cubits/signup/signup_cubit.dart';
 import 'package:dating_app/repositories/auth/auth_repository.dart';
+import 'package:dating_app/repositories/database/database_repository.dart';
+import 'package:dating_app/repositories/storage/storage_repository.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/bio_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/demo_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/email_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/email_verification_screen.dart';
+import 'package:dating_app/screens/onboarding/onboarding_screens/location_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/pictures_screen.dart';
 import 'package:dating_app/screens/onboarding/onboarding_screens/start_screen.dart';
 import 'package:dating_app/widgets/custom_appbar.dart';
@@ -16,9 +20,19 @@ class OnboardingScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => BlocProvider(
-        create: (_) =>
-            SignupCubit(authRepository: context.read<AuthRepository>()),
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) =>
+                SignupCubit(authRepository: context.read<AuthRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => OnboardingBloc(
+              databaseRepository: DatabaseRepository(),
+              storageRepository: StorageRepository(),
+            )..add(StartOnboarding()),
+          ),
+        ],
         child: OnboardingScreen(),
       ),
     );
@@ -30,7 +44,8 @@ class OnboardingScreen extends StatelessWidget {
     Tab(text: 'Email Verification'),
     Tab(text: 'Demographics'),
     Tab(text: 'Pictures'),
-    Tab(text: 'Bio')
+    Tab(text: 'Bio'),
+    Tab(text: 'Location')
   ];
 
   const OnboardingScreen({super.key});
@@ -59,7 +74,8 @@ class OnboardingScreen extends StatelessWidget {
                   EmailVerification(tabController: tabController),
                   Demo(tabController: tabController),
                   Pictures(tabController: tabController),
-                  Biography(tabController: tabController)
+                  Biography(tabController: tabController),
+                  Location(tabController: tabController)
                 ],
               ),
             );

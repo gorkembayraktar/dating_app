@@ -1,5 +1,7 @@
+import 'package:dating_app/blocs/onboarding/onboarding_bloc.dart';
 import 'package:dating_app/repositories/storage/storage_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CustomImageContainer extends StatelessWidget {
@@ -41,7 +43,10 @@ class CustomImageContainer extends StatelessWidget {
                         ));
                       } else {
                         print('uploading..');
-                        StorageRepository().uploadImage(image);
+                        // ignore: use_build_context_synchronously
+                        context
+                            .read<OnboardingBloc>()
+                            .add(UpdateUserImages(image: image));
                       }
                     },
                     icon: Icon(Icons.add_circle, color: Colors.redAccent)))
