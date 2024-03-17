@@ -11,6 +11,8 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return HomeScreen.route();
+      case SplashScreen.routeName:
+        return SplashScreen.route();
       case OnboardingScreen.routeName:
         return OnboardingScreen.route();
       case UsersScreen.routeName:

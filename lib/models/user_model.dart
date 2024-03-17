@@ -47,7 +47,6 @@ class User extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'age': age,
       'gender': gender,

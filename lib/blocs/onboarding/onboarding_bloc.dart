@@ -24,18 +24,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         _storageRepository = storageRepository,
         super(OnboardingLoading()) {
     on<StartOnboarding>((event, emit) async {
-      User user = User(
-          id: '',
-          name: '',
-          age: 0,
-          gender: '',
-          interests: [],
-          imageUrls: [],
-          jobTitle: '',
-          location: '',
-          bio: '');
-      String documentId = await _databaseRepository.createUser(user);
-      emit(OnboardingLoaded(user: user.copyWith(id: documentId)));
+      await _databaseRepository.createUser(event.user!);
+
+      emit(OnboardingLoaded(user: event.user!));
     });
 
     on<UpdateUser>((event, emit) {
@@ -57,13 +48,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         _databaseRepository.getUser(user.id!).listen((user) {
           add(UpdateUser(user: user));
         });
-
-        /*
-        _databaseRepository.getUser(user.id!).listen((user) {
-          print(user);
-          add(UpdateUser(user: user));
-        });
-        */
       }
     });
   }

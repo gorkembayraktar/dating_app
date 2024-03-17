@@ -17,11 +17,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(AuthState.unknown()) {
     //on<LoadUsersEvent>((event, emit) => emit(SwipeLoaded(users: event.users)));
     on<AuthUserChanged>((event, emit) {
-      emit(AuthState.authenticated(user: event.user));
+      event.user != null
+          ? emit(AuthState.authenticated(user: event.user!))
+          : emit(AuthState.unauthenticated());
     });
 
     _userSubscription = authRepository.user.listen((user) {
-      add(AuthUserChanged(user: user!));
+      add(AuthUserChanged(user: user));
     });
   }
 

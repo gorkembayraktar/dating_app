@@ -19,23 +19,8 @@ class OnboardingScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) =>
-                SignupCubit(authRepository: context.read<AuthRepository>()),
-          ),
-          BlocProvider(
-            create: (context) => OnboardingBloc(
-              databaseRepository: DatabaseRepository(),
-              storageRepository: StorageRepository(),
-            )..add(StartOnboarding()),
-          ),
-        ],
-        child: OnboardingScreen(),
-      ),
-    );
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => OnboardingScreen());
   }
 
   static const List<Tab> tabs = <Tab>[
@@ -58,9 +43,7 @@ class OnboardingScreen extends StatelessWidget {
           builder: (BuildContext context) {
             final TabController tabController =
                 DefaultTabController.of(context)!;
-            tabController.addListener(() {
-              if (!tabController.indexIsChanging) {}
-            });
+
             return Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: const CustomAppBar(

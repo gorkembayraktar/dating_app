@@ -1,3 +1,5 @@
+import 'package:dating_app/cubits/signup/signup_cubit.dart';
+
 import 'blocs/blocs.dart';
 import 'repositories/repositories.dart';
 
@@ -28,20 +30,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => AuthRepository()),
+        RepositoryProvider(create: (context) => AuthRepository()),
       ],
       child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => AuthBloc(
+              create: (context) => AuthBloc(
                 authRepository: context.read<AuthRepository>(),
               ),
             ),
             BlocProvider<SwipeBloc>(
-              create: (_) => SwipeBloc()
+              create: (context) => SwipeBloc()
                 ..add(
                   LoadUsersEvent(users: User.users),
                 ),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  SignupCubit(authRepository: context.read<AuthRepository>()),
+            ),
+            BlocProvider(
+              create: (context) => OnboardingBloc(
+                databaseRepository: DatabaseRepository(),
+                storageRepository: StorageRepository(),
+              ),
             ),
           ],
           child: MaterialApp(
@@ -53,7 +65,7 @@ class MyApp extends StatelessWidget {
             ),
             //home: const HomeScreen(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: OnboardingScreen.routeName,
+            initialRoute: SplashScreen.routeName,
           )),
     );
   }

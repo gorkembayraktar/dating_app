@@ -1,6 +1,7 @@
 import 'package:dating_app/repositories/auth/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 part 'signup_state.dart';
 
@@ -13,26 +14,30 @@ class SignupCubit extends Cubit<SignupState> {
           SignupState.initial(),
         );
 
-  void emailChanged(String value){
+  void emailChanged(String value) {
     emit(state.copyWith(email: value, status: SignupStatus.initial));
   }
 
-  void passwordChanged(String value){
+  void passwordChanged(String value) {
     emit(state.copyWith(password: value, status: SignupStatus.initial));
   }
 
-  void signupWithCredentials() async{
-    if(!state.isValid) return;
+  Future<void> signupWithCredentials() async {
+    if (!state.isValid) return;
 
-    try{
-      await _authRepository.signUp(email: state.email, password: state.password);
-      emit(
-          state.copyWith(
-            status: SignupStatus.success
-          )
-      );
-    }catch(_){
+    try {
+      var user = await _authRepository.signUp(
+          email: state.email, password: state.password);
+      emit(state.copyWith(status: SignupStatus.success, user: user));
+    } catch (_) {}
 
-    }
+    /**
+     *  var codes = {
+                  'email-already-in-use': 'Email adresi zaten kullanılıyor',
+                  'weak-password': 'En az 6 karakterli şifre giriniz',
+                  'invalid-email': 'Email adresi geçersiz!',
+                  'invalid-credential': 'Email adresi veya şifre hatalı.'
+                };
+     */
   }
 }
